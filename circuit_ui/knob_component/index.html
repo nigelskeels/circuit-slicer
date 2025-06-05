@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.js"></script>
+  <script type="module" src="knob-component.js"></script>
+  <title>simple-knob knob-component</title>
+  
+  <style>
+    body {
+      margin: 200px;
+      overflow: hidden; 
+      font-family: Arial, Helvetica, sans-serif; 
+    }
+    knob-component{
+      height:55px;
+      width:55px;
+      margin: 10px;
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+  
+
+<h1>simple-knob knob-component</h1>
+<p>Web components and css only, no dependencies!!</p>
+<knob-component id="knob1" style="height:80px!important;width:80px!important;" value="0" min="0" max="500" offsetangle="180" title="Bigger Knob"></knob-component>
+<knob-component id="knob2" style="height:80px!important;width:80px!important;" value="64" min="0" max="128" offsetangle="180" title="Other Knob"></knob-component>
+<knob-component id="knob3" value="100"></knob-component>
+<knob-component id="knob4" value="120"></knob-component>
+<knob-component id="knob5" value="0"></knob-component>
+<knob-component id="knob6" value="0"></knob-component>
+<knob-component id="knob7" value="30"></knob-component>
+<knob-component id="knob8" value="100"></knob-component>
+<knob-component id="knob9" value="120"></knob-component>
+<knob-component id="knob10" value="0"></knob-component>
+<knob-component id="knob11" value="0"></knob-component>
+<knob-component id="knob12" value="30"></knob-component>
+<knob-component id="knob13" value="100"></knob-component>
+<knob-component id="knob14" value="120"></knob-component>
+<knob-component id="knob15" value="0"></knob-component>
+<knob-component id="knob16" value="0"></knob-component>
+<knob-component id="knob17" value="30"></knob-component>
+<knob-component id="knob18" value="100"></knob-component>
+<knob-component id="knob19" value="120"></knob-component>
+<knob-component id="knob20" value="0"></knob-component>
+<knob-component id="knob21" value="0"></knob-component>
+<knob-component id="knob22" value="30"></knob-component>
+<knob-component id="knob23" value="100"></knob-component>
+<knob-component id="knob24" value="120"></knob-component>
+<knob-component id="knob25" value="0"></knob-component>
+<knob-component id="knob26" value="0"></knob-component>
+<knob-component id="knob27" value="30"></knob-component>
+<knob-component id="knob28" value="100"></knob-component>
+<knob-component id="knob29" value="120"></knob-component>
+<knob-component id="knob30" value="0"></knob-component>
+<knob-component id="knob31" value="0"></knob-component>
+<knob-component id="knob32" value="30"></knob-component>
+<knob-component id="knob33" value="100"></knob-component>
+<div id="knobval"></div>
+
+
+<script type="text/javascript">
+  
+  var el = document.getElementsByTagName("knob-component")[0]
+  document.addEventListener('knobuievent', function (ev) { 
+          console.log("knobuievent",ev.detail) 
+          document.getElementById("knobval").innerHTML = "Turn knob to see value = "+ev.detail.id+" "+ev.detail.data3
+  }, false);
+
+</script>
+
+
+</body>
+</html>
