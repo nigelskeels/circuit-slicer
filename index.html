@@ -1,265 +1,266 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name='viewport' content='width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0' />
-  <script type="text/javascript" src="js/webcomponents-lite.js"></script>
+  <head>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0"
+    />
+    <script type="text/javascript" src="js/webcomponents-lite.js"></script>
 
-  <!-- <link rel="import" href="circuit_ui/circuit_component/circuit_component.html" > -->
-  <script type="module" src="circuit_ui/circuit_component/circuit_component.js"></script>
-  <script type="text/javascript" src="js/jackdaw.beatdetection.js"></script>
-  <script type="text/javascript" src="js/jackdaw.waveformdisplay.js"></script>
-  <script type="text/javascript" src="js/jackdaw.audioexport.js"></script>
-  <script type="text/javascript" src="js/jackdaw.nativerecorder.js"></script>
+    <!-- <link rel="import" href="circuit_ui/circuit_component/circuit_component.html" > -->
+    <script
+      type="module"
+      src="circuit_ui/circuit_component/circuit_component.js"
+    ></script>
+    <script type="text/javascript" src="js/jackdaw.beatdetection.js"></script>
+    <script type="text/javascript" src="js/jackdaw.waveformdisplay.js"></script>
+    <script type="text/javascript" src="js/jackdaw.audioexport.js"></script>
+    <script type="text/javascript" src="js/jackdaw.nativerecorder.js"></script>
 
-  <!-- // <script type="text/javascript" src="js/jackdaw.midicircuit.js"></script> -->
+    <!-- // <script type="text/javascript" src="js/jackdaw.midicircuit.js"></script> -->
 
- 
-  <title>Jackdaw Beatdetection</title>
-  <style type="text/css">
-    body {
-      overflow:hidden;
-      font-family: "Arial Black", Gadget, sans-serif;
-      background-color: #d4d4d4;
-    }
-    #maintitle{
-      font-size: 29px;
-      right: 0;
-      position: absolute;
-      top: -17px;
-    }
-    #allcontainer{
-      /* border:solid 1px red; */
-      width:787px;
-      height:860px;
-      
-      position: absolute;
-      margin: auto;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
-    svg {
-       fill:orange;
-       position: absolute;
-       left: 9px;
-    }
-    .downloadlink{
-      clear:both;
-      display: block;
-    }
-    .recording{
-      background-color: red;
-      color: white;
-    }
-    #canvascontainer{
-      /*overflow-x:auto;*/
-      position: relative;
-      width:100%;
-      height:200px;
-      border:solid 1px #999;
-    }
-    #svg,#waveform{
+    <title>Jackdaw Beatdetection</title>
+    <style type="text/css">
+      body {
+        overflow: hidden;
+        font-family: "Arial Black", Gadget, sans-serif;
+        background-color: #d4d4d4;
+      }
+      #maintitle {
+        font-size: 29px;
+        right: 0;
         position: absolute;
-        top:0;
-        left:0;
-    }
-  </style>
-</head>
+        top: -17px;
+      }
+      #allcontainer {
+        /* border:solid 1px red; */
+        width: 787px;
+        height: 860px;
 
-<body>
-  
-<div id="allcontainer">
-<div id="maintitle">RESISTANCE</div>
-  
-<div id="text"></div>
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      svg {
+        fill: orange;
+        position: absolute;
+        left: 9px;
+      }
+      .downloadlink {
+        clear: both;
+        display: block;
+      }
+      .recording {
+        background-color: red;
+        color: white;
+      }
+      #canvascontainer {
+        /*overflow-x:auto;*/
+        position: relative;
+        width: 100%;
+        height: 200px;
+        border: solid 1px #999;
+      }
+      #svg,
+      #waveform {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
 
-<div id="canvascontainer">
-  <svg id="svg"></svg>
-  <canvas id="waveform"></canvas>
-</div>
+  <body>
+    <div id="allcontainer">
+      <div id="maintitle">CIRCUIT SLICER</div>
 
-<!-- <button id="rec" onClick="Startrecording(this)">Record</button> -->
-<input name="fileupload" id="fileuploader" type="file" style="display:none;">
-<!-- <button id="play" onClick="Stoprecording()">Play</button> -->
+      <div id="text"></div>
 
+      <div id="canvascontainer">
+        <svg id="svg"></svg>
+        <canvas id="waveform"></canvas>
+      </div>
 
-<div id="slicebuts"></div>
-<br>
-<!-- <input id="startpointslider" onInput="Jackdaw.Beatdetection.updatepeaks(this.value)" min="1" max="100" step="1" value="0" type="range"/> -->
-<!-- <input id="endpointslider" onInput="Jackdaw.Beatdetection.updateends(this.value)" min="1" max="100" step="1" value="0" type="range"/> -->
-<!-- <button onClick="Jackdaw.Beatdetection.reverseslice()">Reverse slice</button>
+      <!-- <button id="rec" onClick="Startrecording(this)">Record</button> -->
+      <input
+        name="fileupload"
+        id="fileuploader"
+        type="file"
+        style="display: none"
+      />
+      <!-- <button id="play" onClick="Stoprecording()">Play</button> -->
+
+      <div id="slicebuts"></div>
+      <br />
+      <!-- <input id="startpointslider" onInput="Jackdaw.Beatdetection.updatepeaks(this.value)" min="1" max="100" step="1" value="0" type="range"/> -->
+      <!-- <input id="endpointslider" onInput="Jackdaw.Beatdetection.updateends(this.value)" min="1" max="100" step="1" value="0" type="range"/> -->
+      <!-- <button onClick="Jackdaw.Beatdetection.reverseslice()">Reverse slice</button>
 <button onClick="Jackdaw.Beatdetection.boostbass()">Boost bass</button>
 
 <button onClick="Jackdaw.Beatdetection.getcurrentslicebuffer()">Export slice</button>
 <button onClick="Jackdaw.Beatdetection.getallslices()">Export all slices</button>
 <br><br>
  -->
- <circuit-component name="nigel"></circuit-component>
-</div>
-<script>
+      <circuit-component name="nigel"></circuit-component>
+    </div>
+    <script>
+      window.AudioContext = window.AudioContext || window.webkitAudioContext
+      var context = new AudioContext()
 
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var context = new AudioContext();
+      document.addEventListener("DOMContentLoaded", function () {
+        Jackdaw.Beatdetection.init()
+        Jackdaw.Nativerecorder.init()
 
+        var recbut
 
-    document.addEventListener("DOMContentLoaded",function(){
+        // images = ["sounds/snaredry.wav","sounds/snare.wav","sounds/kick.wav","sounds/hihat.wav"];
+        file = "sounds/drumkit3.wav"
 
-           
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", file, true)
+        xhr.responseType = "arraybuffer"
 
+        xhr.onload = function (e) {
+          if (this.status == 200) {
+            // make  copy of buffer
+            var buf2 = this.response.slice(0)
+            Jackdaw.Beatdetection.calculatetempo(buf2)
 
-             Jackdaw.Beatdetection.init();
-             Jackdaw.Nativerecorder.init();
-           
-
-             var recbut;
-
-              // images = ["sounds/snaredry.wav","sounds/snare.wav","sounds/kick.wav","sounds/hihat.wav"];
-               file = "sounds/drumkit3.wav";
-
-               var xhr = new XMLHttpRequest();
-                xhr.open('GET', file, true);
-                xhr.responseType = 'arraybuffer';
-
-                xhr.onload = function(e) {
-                  if (this.status == 200) {
-
-
-                          // make  copy of buffer
-                          var buf2 = this.response.slice(0);
-                          Jackdaw.Beatdetection.calculatetempo(buf2); 
-
-                          context.decodeAudioData(this.response, function(buffer) {
-                            Jackdaw.Waveformdisplay.drawbuffer(buffer)
-                          }, 
-                            function(e){console.log("error ",e)}
-                          );
-                  }
-                };
-                xhr.send();
-
-              });
-
-              function openfileuploader(){
-                  document.getElementById('fileuploader').click()
+            context.decodeAudioData(
+              this.response,
+              function (buffer) {
+                Jackdaw.Waveformdisplay.drawbuffer(buffer)
+              },
+              function (e) {
+                console.log("error ", e)
               }
-             
+            )
+          }
+        }
+        xhr.send()
+      })
 
-              function Startrecording(){
-                  let test = circuitcomponent._getbuttonnumber(140)
-                  Jackdaw.Nativerecorder.startrecorder();
-                  document.getElementsByTagName("circuit-component")[0]._setbutton([140,'red','Rec','Stoprecording'])                     
+      function openfileuploader() {
+        document.getElementById("fileuploader").click()
+      }
+
+      function Startrecording() {
+        let test = circuitcomponent._getbuttonnumber(140)
+        Jackdaw.Nativerecorder.startrecorder()
+        document
+          .getElementsByTagName("circuit-component")[0]
+          ._setbutton([140, "red", "Rec", "Stoprecording"])
+      }
+
+      function Stoprecording() {
+        let test = circuitcomponent._getbuttonnumber(140)
+        Jackdaw.Nativerecorder.stoprecorder()
+        document
+          .getElementsByTagName("circuit-component")[0]
+          ._setbutton([140, "grey", "Rec", "Startrecording"])
+      }
+
+      document.body.addEventListener(
+        "nativerecorderevent",
+        function (ev) {
+          console.log("nativerecorderevent", ev.detail)
+          processincomingaudio(ev.detail)
+        },
+        false
+      )
+
+      document
+        .getElementById("fileuploader")
+        .addEventListener("change", function (ev) {
+          console.log("fileupload", ev)
+          processincomingaudio(ev.target.files[0])
+        })
+
+      var circuitcomponent =
+        document.getElementsByTagName("circuit-component")[0]
+
+      function processincomingaudio(ev) {
+        let fileReader = new FileReader()
+        let arrayBuffer
+
+        fileReader.onloadend = () => {
+          arrayBuffer = fileReader.result
+
+          context.decodeAudioData(arrayBuffer, function (buffers) {
+            circuitcomponent._resetdata()
+            Jackdaw.Waveformdisplay.drawbuffer(buffers)
+            Jackdaw.Beatdetection.calc(buffers)
+          })
+        }
+
+        fileReader.readAsArrayBuffer(ev)
+      }
+
+      document.body.addEventListener(
+        "circuituievent",
+        function (ev) {
+          console.log("circuituievent", ev.detail)
+
+          if (ev.detail.data1 == 176) {
+            if (ev.detail.data2 == 57) {
+              var threshval = (0.51 / 127) * ev.detail.data3
+              console.log("Threshold ", ev.detail.data3, threshval)
+              Jackdaw.Beatdetection.setthreshold(threshval)
+            }
+            if (ev.detail.data2 == 49) {
+              Jackdaw.Beatdetection.updatepeaks(parseInt(ev.detail.data3))
+            }
+            if (ev.detail.data2 == 50) {
+              Jackdaw.Beatdetection.updatepeaksfine(parseInt(ev.detail.data3))
+            }
+
+            if (ev.detail.data2 == 51) {
+              Jackdaw.Beatdetection.updateends(parseInt(ev.detail.data3))
+            }
+
+            if (ev.detail.data2 == 52) {
+              Jackdaw.Beatdetection.updateendsfine(parseInt(ev.detail.data3))
+            }
+          }
+          if (ev.detail.data1 == 144) {
+            //Button Down
+            // console.log("testtttt",circuitcomponent._getbuttonnumber(parseInt(ev.detail.data2)) )
+
+            var databut = circuitcomponent._getbuttonnumber(
+              parseInt(ev.detail.data2)
+            )
+            if (databut != undefined) {
+              if (Number.isInteger(databut)) {
+                Jackdaw.Beatdetection.playslice(
+                  circuitcomponent._getbuttonnumber(parseInt(ev.detail.data2))
+                )
+              } else {
+                console.log("Run fuction...", databut)
+                //If there is a function stored on the button run it.....
+                var methods = databut.split(".")
+                var result = window
+                for (var i in methods) {
+                  result = result[methods[i]]
+                }
+                //execute it
+                result()
               }
-                  
-                  
-              function Stoprecording(){
-                  let test = circuitcomponent._getbuttonnumber(140)
-                  Jackdaw.Nativerecorder.stoprecorder()
-                  document.getElementsByTagName("circuit-component")[0]._setbutton([140,'grey','Rec','Startrecording'])   
-              }
+            }
+          }
+          if (ev.detail.data1 == 128) {
+            //BUTTON RELEASED
+          }
+        },
+        false
+      )
 
-
-              document.body.addEventListener('nativerecorderevent', function (ev) { 
-
-                  console.log("nativerecorderevent",ev.detail) 
-                  processincomingaudio(ev.detail)
-                  
-              }, false);
-
-
-              document.getElementById("fileuploader").addEventListener('change', function (ev) { 
-
-                console.log("fileupload",ev)
-                processincomingaudio(ev.target.files[0])
-
-              })
-
-              var circuitcomponent = document.getElementsByTagName("circuit-component")[0];
-
-              function processincomingaudio(ev){
-                  let fileReader = new FileReader();
-                  let arrayBuffer;
-
-                  fileReader.onloadend = () => {
-                      arrayBuffer = fileReader.result;
-
-                      context.decodeAudioData(arrayBuffer, function(buffers) {
-                        circuitcomponent._resetdata()
-                        Jackdaw.Waveformdisplay.drawbuffer(buffers)
-                        Jackdaw.Beatdetection.calc( buffers ); 
-                      });
-                  }
-
-                  fileReader.readAsArrayBuffer(ev);                
-              }
-
-           
-
-
-              document.body.addEventListener('circuituievent', function (ev) { 
-
-                    console.log("circuituievent",ev.detail) 
-
-
-                    if(ev.detail.data1==176){
-                      if(ev.detail.data2==57){
-                        var threshval = (0.51/127)*ev.detail.data3
-                        console.log("Threshold ",ev.detail.data3,threshval)
-                        Jackdaw.Beatdetection.setthreshold(threshval)
-                      }
-                      if(ev.detail.data2==49){
-                        Jackdaw.Beatdetection.updatepeaks(parseInt(ev.detail.data3))
-                      }
-                      if(ev.detail.data2==50){
-                        Jackdaw.Beatdetection.updatepeaksfine(parseInt(ev.detail.data3))
-                      }
-
-                      if(ev.detail.data2==51){
-                        Jackdaw.Beatdetection.updateends(parseInt(ev.detail.data3))
-                      }
-
-                      if(ev.detail.data2==52){
-                        Jackdaw.Beatdetection.updateendsfine(parseInt(ev.detail.data3))
-                      }
-
-                    }
-                    if(ev.detail.data1==144){
-                        //Button Down
-                        // console.log("testtttt",circuitcomponent._getbuttonnumber(parseInt(ev.detail.data2)) )
-
-                        var databut = circuitcomponent._getbuttonnumber(parseInt(ev.detail.data2))
-                        if(databut!=undefined){
-                          if(Number.isInteger(databut)){
-                            Jackdaw.Beatdetection.playslice(circuitcomponent._getbuttonnumber(parseInt(ev.detail.data2)))
-                          }else{
-                            console.log("Run fuction...",databut);                       
-                            //If there is a function stored on the button run it.....
-                            var methods = databut.split(".");
-                            var result = window;
-                            for(var i in methods) {
-                                result = result[methods[i]];
-                            }
-                            //execute it
-                            result();
-                          }
-                        }
-
-
-                    }
-                    if(ev.detail.data1==128){
-                        //BUTTON RELEASED
-                    }
-
-              }, false);
-
-            
-               
-              //test
-              // document.getElementsByTagName("circuit-component")[0]._setbutton([108,'red','Boaty'])   
-       
-
-
-</script>
-</body>
+      //test
+      // document.getElementsByTagName("circuit-component")[0]._setbutton([108,'red','Boaty'])
+    </script>
+  </body>
+</html>
