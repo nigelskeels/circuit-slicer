@@ -2,7 +2,7 @@
 
 Sampler and slicer for the Novation Circuit groovebox
 
-[![Watch the video](circuit-slicer.png)](video.mp4)
+[<img src="circuit-slicer.png">](https://nigelskeels.github.io/circuit-slicer/)
 
 Demo Here..
 https://nigelskeels.github.io/circuit-slicer/
